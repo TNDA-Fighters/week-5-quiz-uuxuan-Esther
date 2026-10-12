@@ -7,10 +7,9 @@
 - 完成版本：[本次功能最後一筆 commit hash]
 
 ## 我的做法
-
-- 按鍵怎麼分開：[說明 1P／2P 的按鍵設定]
-- 2P 怎麼控制角色：[說明鍵盤操作如何交給場上的 CPU]
-- 出拳後怎麼恢復移動：[說明按住方向出拳時的處理]
+- 按鍵怎麼分開：[複製 IA_Move和 IA_Attack1，改一下檔案名字。在IMC_Combat把方向鍵從IA_Move刪掉，IA_P2Move裡加上方向鍵，Modifier照抄WASD的設定（↑ Swizzle、↓ Swizzle + Negate、← Negate、→ 不加）。Num7對應到IA_P2Attack這樣 1P 就只剩WASD和 U]
+- 2P 怎麼控制角色：[這方面不是很清楚，知道1P的控制是在PlayerController、移動是取相機的Yaw算出Forward／Right向量，再對 CPU 呼叫 Add Movement Input，所以方向才會跟 1P 一樣照畫面決定，其他的部份自己還要再花時間了解。]
+- 出拳後怎麼恢復移動：[在Add Movement Input前用Branch分支檢查CPU的 Is Attacking，如果在攻擊時就不移動，所以要接在false那邊。方向鍵按住時Triggered每一幀都會觸發，所以要等到出拳結束後會自動繼續移動。]
 
 ## 驗收結果
 
